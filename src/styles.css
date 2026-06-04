@@ -1,0 +1,97 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-pink: var(--brand-pink);
+  --color-brand-amber: var(--brand-amber);
+}
+
+:root {
+  --radius: 0.875rem;
+  /* Dark vibrant creative-studio theme */
+  --background: oklch(0.13 0.02 280);
+  --foreground: oklch(0.98 0.005 280);
+  --card: oklch(0.18 0.025 280);
+  --card-foreground: oklch(0.98 0.005 280);
+  --popover: oklch(0.18 0.025 280);
+  --popover-foreground: oklch(0.98 0.005 280);
+  --primary: oklch(0.7 0.25 330);
+  --primary-foreground: oklch(0.13 0.02 280);
+  --secondary: oklch(0.22 0.03 280);
+  --secondary-foreground: oklch(0.98 0.005 280);
+  --muted: oklch(0.22 0.03 280);
+  --muted-foreground: oklch(0.7 0.02 280);
+  --accent: oklch(0.25 0.05 320);
+  --accent-foreground: oklch(0.98 0.005 280);
+  --destructive: oklch(0.65 0.25 27);
+  --destructive-foreground: oklch(0.98 0.005 280);
+  --border: oklch(0.28 0.03 280 / 60%);
+  --input: oklch(0.28 0.03 280);
+  --ring: oklch(0.7 0.25 330);
+  --brand-purple: oklch(0.6 0.25 300);
+  --brand-pink: oklch(0.7 0.27 350);
+  --brand-amber: oklch(0.78 0.18 65);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-feature-settings: "ss01", "cv11";
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(90deg, oklch(0.78 0.18 65), oklch(0.7 0.27 350), oklch(0.65 0.25 300));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-brand {
+    background: linear-gradient(135deg, oklch(0.78 0.18 65), oklch(0.7 0.27 350), oklch(0.6 0.25 300));
+  }
+  .glow {
+    box-shadow: 0 0 60px -10px oklch(0.7 0.27 350 / 0.5), 0 0 120px -40px oklch(0.6 0.25 300 / 0.4);
+  }
+  @keyframes float-slow {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, -20px) scale(1.05); }
+  }
+  .animate-float-slow { animation: float-slow 12s ease-in-out infinite; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-marquee { animation: marquee 30s linear infinite; }
+}
