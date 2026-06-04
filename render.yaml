@@ -3,71 +3,16 @@ services:
     name: pixel-reel
     env: node
     plan: free
-    buildCommand: npm install --legacy-peer-deps && npm run build
+    buildCommand: npm install --legacy-peer-deps && ./node_modules/.bin/vite build
     startCommand: npm run preview
     envVars:
-      # Supabase
       - key: VITE_SUPABASE_URL
-        scope: build,runtime
         value: https://dwdywurpcebxznqzmgch.supabase.co
       - key: VITE_SUPABASE_PUBLISHABLE_KEY
-        scope: build,runtime
-        fromDatabase:
-          name: pixel_reel_db
-          property: supabase_key
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR3ZHl3dXJwY2VieHpucXptZ2NoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0MzgzMDEsImV4cCI6MjA5NjAxNDMwMX0.F0n_H96cUwhoFfC0sfgH2ZYGeyjkJZntwchEfIJs4Nw
       - key: SUPABASE_URL
-        scope: build,runtime
         value: https://dwdywurpcebxznqzmgch.supabase.co
       - key: SUPABASE_SERVICE_ROLE_KEY
-        scope: build,runtime
-        fromDatabase:
-          name: pixel_reel_db
-          property: service_role_key
-      # Stripe
-      - key: STRIPE_SANDBOX_API_KEY
-        scope: build,runtime
-        fromDatabase:
-          name: pixel_reel_db
-          property: stripe_sandbox_key
-      - key: STRIPE_LIVE_API_KEY
-        scope: build,runtime
-        fromDatabase:
-          name: pixel_reel_db
-          property: stripe_live_key
-      - key: PAYMENTS_SANDBOX_WEBHOOK_SECRET
-        scope: build,runtime
-        fromDatabase:
-          name: pixel_reel_db
-          property: stripe_sandbox_webhook
-      - key: PAYMENTS_LIVE_WEBHOOK_SECRET
-        scope: build,runtime
-        fromDatabase:
-          name: pixel_reel_db
-          property: stripe_live_webhook
-      # Lovable
-      - key: LOVABLE_API_KEY
-        scope: build,runtime
-        fromDatabase:
-          name: pixel_reel_db
-          property: lovable_api_key
-      - key: LOVABLE_SEND_URL
-        scope: build,runtime
-        value: https://api.lovable.dev/email/send
-      # Node
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR3ZHl3dXJwY2VieHpucXptZ2NoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDQzODMwMSwiZXhwIjoyMDk2MDE0MzAxfQ.ufvHvWGPWvXNZdMkpKZRSVVVVVVVVVVVVVVVVVVVVVV
       - key: NODE_ENV
-        scope: build,runtime
         value: production
-    domains:
-      - pixelreel.studio
-      - www.pixelreel.studio
-    healthCheckPath: /
-    headers:
-      - path: /*
-        name: X-Frame-Options
-        value: SAMEORIGIN
-      - path: /*
-        name: X-Content-Type-Options
-        value: nosniff
-      - path: /*
-        name: X-XSS-Protection
-        value: 1; mode=block
